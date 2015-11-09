@@ -11,8 +11,10 @@ import Data.List (elemIndex)
 alignMethods :: String -> String
 alignMethods s = 
     let xs              = lines s
-        maxIndent = foldr maxColonIndent 0 xs 
-        xs' = map (reIndent maxIndent) xs
+        firstIndent = colonIndex (head xs)
+        i = foldr minIndent 0 xs 
+        i' = max firstIndent i
+        xs' = map (reIndent i') xs
     in unlines xs'
 
 reIndent :: Int -> String -> String
@@ -29,8 +31,8 @@ removeSpaces n s =
     let s' = dropWhile (== ' ') s
     in addSpaces n s'
 
-maxColonIndent :: String -> Int -> Int 
-maxColonIndent s oldMax = max oldMax (colonIndex s) 
+minIndent :: String -> Int -> Int 
+minIndent s old = min old (colonIndex s) 
 
 colonIndex :: String -> Int
 colonIndex s = maybe 0 id (elemIndex ':' s)
