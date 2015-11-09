@@ -8,3 +8,9 @@ a method, and running `:!objcalign`
 
 The command assumes that the keywords and params are already on separate lines.
 
+
+## Install
+
+`stack install`
+
+
