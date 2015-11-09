@@ -17,7 +17,8 @@ alignMethods s =
 
 reIndent :: Int -> String -> String
 reIndent 0 s = s
-reIndent n s | n > (colonIndex s) = addSpaces (n - (colonIndex s)) s
+reIndent n s | colonIndex s == 0  = s
+             | n > (colonIndex s) = addSpaces (n - (colonIndex s)) s
              | n < (colonIndex s) = removeSpaces ((colonIndex s) - n) s
 reIndent _ s = s
 
